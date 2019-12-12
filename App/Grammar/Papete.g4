@@ -3,10 +3,11 @@ grammar Papete;
 
 
 
-import_: IMPORTOK*;
+import_: IMPORTOK* //Implemented
+       ; 
 
 prog: 
-    import_
+    import_ //Implemented
     | (line EOL)* EOF //Implemented
     ;
 
@@ -26,7 +27,8 @@ argsblock: PAROPEN (expr (COMMA expr)*)? PARCLOSE //Implemented
 exprblock: PAROPEN expr PARCLOSE //Implemented
         ; 
 
-loop: WHILEFUNC exprblock stmt;
+loop: WHILEFUNC exprblock stmt //Implemented
+    ; 
 
 cond: IFTOK exprblock stmt (ELSETOK  stmt)? //Implemented
     ; 

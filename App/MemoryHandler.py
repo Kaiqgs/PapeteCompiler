@@ -54,8 +54,6 @@ class MemoryHandler:
             #warnings.warn(f"You're re-defining the variable {var.getText()}!")
         self.variables[id_] = self._variableProperties(type_=type_)
         return id_
-    
-    
 
     def assignVariables(self, ids_, vals):
         for id_, val in zip(ids_, vals):
@@ -65,7 +63,7 @@ class MemoryHandler:
         if(id_ in self.variables):
             type_ = self.variables[id_]["type"]
             if(type_ == "int"):
-                if(isinstance(val, str) and len(val) <=1):
+                if(isinstance(val, str) and len(val) <= 1):
                     val = ord(val)
                 else:
                     val = int(val)
@@ -76,22 +74,31 @@ class MemoryHandler:
                     val = chr(val)
                 else:
                     val = str(val)[0]
-            elif(type_=="bool"):
+            elif(type_ == "bool"):
                 val = bool(val)
             elif(type_ == "double"):
                 val = float(val)
+            elif(type_ == "func"):
+                try:
+                    decl = val[0]
+                    stmt = val[1]
+                    musttrue = issubclass(decl.__class__, PapeteParser.ParamblockContext) and issubclass(
+                        stmt.__class__, PapeteParser.StmtContext)
+                    assert(musttrue)
+
+                except:
+                    raise Exception(
+                        "Can only assign function to function typed variable.")
             self.variables[id_]["value"] = val
         else:
-            
+
             raise NotDefinedError(id_[0])
 
     def assignScopelessVariable(self, var, val):
-        
+
         id_ = self.findVariable(var)
         self.assignVariable(id_, val)
 
-
-    
     def findVariable(self, var):
         scope = self.getScope(var)
         id_ = self._variableIdentifier(var, scope)
@@ -124,8 +131,6 @@ class MemoryHandler:
 
     def _variableProperties(self, type_=None):
         return {"value": None, "type": type_}
-
-    
 
     def __repr__(self):
         val = ""

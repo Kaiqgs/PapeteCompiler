@@ -19,4 +19,4 @@ func fib(int n){
     return result;
 };
 
-print(fib(val));
+print("Fib("+val+")= "+fib(val));
