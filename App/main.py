@@ -8,6 +8,9 @@ from App.Grammar.PapeteListener import PapeteListener
 from App.PapeteVisitorImpl import PapeteVisitorImpl
 from App.PapeteVisitorImpl import log
 from App.PapetePreprocessor import import_files_now
+
+
+# TODO: remove this debugging feature later on;
 parser = None
 
 

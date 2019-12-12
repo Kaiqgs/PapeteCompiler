@@ -6,7 +6,7 @@ import antlr4
 
 
 def log(*msg, **kwargs):
-    # return
+    return
     print(*msg, **kwargs)
 
 
